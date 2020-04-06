@@ -7,7 +7,7 @@ cookie_test(async t => {
   let eventPromise = observeNextCookieChangeEvent();
   await cookieStore.set('', 'first-value');
   assert_equals(
-    (await cookieStore.getAll('')).map(({ value }) => value).join(';'),
+    (await getCookieString('')),
     'first-value',
     'Cookie with no name and normal value should have been set');
   await verifyCookieChangeEvent(
@@ -30,7 +30,7 @@ cookie_test(async t => {
       ' no name and "=" in value (via options)');
 
   assert_equals(
-    (await cookieStore.getAll('')).map(({ value }) => value).join(';'),
+    (await getCookieString('')),
     'first-value',
     'Cookie with no name should still have previous value');
 
