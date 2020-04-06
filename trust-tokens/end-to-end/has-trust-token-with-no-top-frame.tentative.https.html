@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Tests the Trust Token API's hasTrustToken behavior in documents with no top frame</title>
+<link rel="help" href="https://github.com/WICG/trust-token-api" />
+<script src="/resources/testharness.js"></script>
+<script src="/resources/testharnessreport.js"></script>
+
+<body>
+  <script>
+    'use strict';
+
+    const frame = document.createElement('iframe');
+    document.body.appendChild(frame);
+    const cachedDocument = window[0].document;
+    frame.remove();
+
+    promise_test(() => {
+        let myPromise = cachedDocument.hasTrustToken("https://issuer.example");
+        myPromise = myPromise.then((res) => {
+          assert_unreached("Should have thrown.");
+        }).catch((e) => {
+          assert_equals(e.name, "InvalidStateError", "hasTrustToken requires that the calling document have a top frame origin.");
+        });
+        return myPromise;
+      },
+      'hasTrustToken with no top frame');
+  </script>
+</body>
