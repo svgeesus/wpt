@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>CSS Basic User Interface Test: outline-offset subpixels</title>
+<link rel="author" title="Manuel Rego Casasnovas" href="mailto:rego@igalia.com">
+<link rel="help" href="https://drafts.csswg.org/css-ui/#outline-offset">
+<link rel="mismatch" href="reference/outline-offset-002-ref-a.html">
+<link rel="mismatch" href="reference/outline-offset-002-ref-b.html">
+<meta name="assert" content="Test checks that outline-offset support subpixel values (decimal values for pixels).">
+<style>
+div {
+  width: 100px;
+  height: 100px;
+  background: green;
+  outline: 5px solid blue;
+  outline-offset: 1.5px;
+}
+</style>
+<p>The test passes if it has the same output than the reference (blue outline has 1.5px offset).</p>
+<div></div>
